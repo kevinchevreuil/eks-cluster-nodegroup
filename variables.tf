@@ -4,9 +4,9 @@ variable "private_key_path" {
 }
 
 variable "aws_region" {
-  type    = string
+  type = string
 }
 
 variable "eks_role" {
-  type    = string
+  type = string
 }
