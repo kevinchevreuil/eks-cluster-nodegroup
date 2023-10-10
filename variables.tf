@@ -2,6 +2,6 @@ variable "aws_region" {
   type = string
 }
 
-variable "eks_role" {
+variable "k8s_version" {
   type = string
 }
