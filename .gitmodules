@@ -1,6 +1,3 @@
 [submodule "modules/aws-compute-base"]
 	path = modules/aws-compute-base
 	url = https://gitlab.com/kevinchevreuil/aws-compute-base.git
-[submodule "modules/eks-iam-role"]
-	path = modules/eks-iam-role
-	url = https://gitlab.com/kevinchevreuil/eks-iam-role.git
