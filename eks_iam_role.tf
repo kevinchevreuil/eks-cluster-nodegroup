@@ -9,7 +9,8 @@ resource "aws_iam_role" "kaisen-eks-role" {
         Principal = {
           Service = [
             "ec2.amazonaws.com",
-            "eks.amazonaws.com"
+            "eks.amazonaws.com",
+            "eks-nodegroup.amazonaws.com"
           ]
         }
       },
@@ -22,12 +23,11 @@ resource "aws_iam_role_policy_attachment" "kaisen-eks-role-attachment" {
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
     "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
-    "arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
     "arn:aws:iam::aws:policy/AmazonEKSLocalOutpostClusterPolicy",
     "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
     "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
-    "arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess",
+    "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
   ])
 
   role       = aws_iam_role.kaisen-eks-role.name
