@@ -28,6 +28,7 @@ resource "aws_iam_role_policy_attachment" "kaisen-eks-role-attachment" {
     "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController",
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
+    "arn:aws:iam::aws:policy/ElasticLoadBalancingReadOnly",
   ])
 
   role       = aws_iam_role.kaisen-eks-role.name
