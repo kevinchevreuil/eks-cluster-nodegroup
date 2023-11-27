@@ -2,7 +2,7 @@ resource "aws_lb" "kaisen-eks-alb" {
   name                             = "Kaisen-EKS-ALB"
   internal                         = false
   load_balancer_type               = "application"
-  security_groups                  = [module.aws_compute_base.sg]
+  security_groups                  = [aws_eks_cluster.kaisen-eks.vpc_config[0].cluster_security_group_id]
   subnets                          = [module.aws_compute_base.public-subnet-a, module.aws_compute_base.public-subnet-b, module.aws_compute_base.public-subnet-c]
   enable_deletion_protection       = false
   enable_http2                     = true

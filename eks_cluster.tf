@@ -6,7 +6,7 @@ resource "aws_eks_cluster" "kaisen-eks" {
 
   vpc_config {
     subnet_ids              = [module.aws_compute_base.public-subnet-a, module.aws_compute_base.public-subnet-b, module.aws_compute_base.public-subnet-c]
-    security_group_ids      = [aws_security_group.kaisen-eks-sg.id]
+    security_group_ids      = [module.aws_compute_base.sg]
     endpoint_private_access = true
     endpoint_public_access  = true
     public_access_cidrs     = ["0.0.0.0/0"]
