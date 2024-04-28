@@ -28,6 +28,18 @@ resource "aws_eks_addon" "kaisen-eks-addon-kube-proxy" {
   ]
 }
 
+resource "aws_eks_addon" "kaisen-eks-addon-efs-csi-driver" {
+  cluster_name                = aws_eks_cluster.kaisen-eks.name
+  addon_name                  = "aws-efs-csi-driver"
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+  service_account_role_arn    = aws_iam_role.kaisen-eks-iam-role-oidc.arn
+  depends_on = [
+    aws_eks_node_group.kaisen-eks-nodegroup,
+    aws_iam_role.kaisen-eks-iam-role-oidc
+  ]
+}
+
 resource "aws_eks_addon" "kaisen-eks-addon-ebs-csi-driver" {
   cluster_name                = aws_eks_cluster.kaisen-eks.name
   addon_name                  = "aws-ebs-csi-driver"
