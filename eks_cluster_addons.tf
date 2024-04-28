@@ -72,6 +72,16 @@ resource "aws_eks_addon" "kaisen-eks-addon-csi-s3" {
   ]
 }
 
+resource "aws_eks_addon" "kaisen-eks-addon-pod-identity-agent" {
+  cluster_name                = aws_eks_cluster.kaisen-eks.name
+  addon_name                  = "eks-pod-identity-agent"
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+  depends_on = [
+    aws_eks_node_group.kaisen-eks-nodegroup
+  ]
+}
+
 resource "aws_eks_addon" "kaisen-eks-addon-cloudwatch-observability" {
   cluster_name                = aws_eks_cluster.kaisen-eks.name
   addon_name                  = "amazon-cloudwatch-observability"
@@ -81,3 +91,4 @@ resource "aws_eks_addon" "kaisen-eks-addon-cloudwatch-observability" {
     aws_eks_node_group.kaisen-eks-nodegroup
   ]
 }
+
