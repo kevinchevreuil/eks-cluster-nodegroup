@@ -1,5 +1,5 @@
-resource "aws_iam_role" "kaisen-eks-role" {
-  name = "Kaisen_EKS_role"
+resource "aws_iam_role" "kdzdo-eks-role" {
+  name = "Kdzdo_EKS_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -18,7 +18,7 @@ resource "aws_iam_role" "kaisen-eks-role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "kaisen-eks-role-attachment" {
+resource "aws_iam_role_policy_attachment" "kdzdo-eks-role-attachment" {
   for_each = toset([
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
@@ -31,6 +31,6 @@ resource "aws_iam_role_policy_attachment" "kaisen-eks-role-attachment" {
     "arn:aws:iam::aws:policy/ElasticLoadBalancingReadOnly",
   ])
 
-  role       = aws_iam_role.kaisen-eks-role.name
+  role       = aws_iam_role.kdzdo-eks-role.name
   policy_arn = each.value
 }

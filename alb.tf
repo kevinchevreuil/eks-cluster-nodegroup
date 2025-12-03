@@ -1,8 +1,8 @@
-resource "aws_lb" "kaisen-eks-alb" {
-  name                             = "Kaisen-EKS-ALB"
+resource "aws_lb" "kdzdo-eks-alb" {
+  name                             = "Kdzdo-EKS-ALB"
   internal                         = false
   load_balancer_type               = "application"
-  security_groups                  = [aws_eks_cluster.kaisen-eks.vpc_config[0].cluster_security_group_id]
+  security_groups                  = [aws_eks_cluster.kdzdo-eks.vpc_config[0].cluster_security_group_id]
   subnets                          = [module.aws_compute_base.public-subnet-a, module.aws_compute_base.public-subnet-b, module.aws_compute_base.public-subnet-c]
   enable_deletion_protection       = false
   enable_http2                     = true
@@ -11,12 +11,12 @@ resource "aws_lb" "kaisen-eks-alb" {
   preserve_host_header             = true
 
   depends_on = [
-    aws_eks_node_group.kaisen-eks-nodegroup
+    aws_eks_node_group.kdzdo-eks-nodegroup
   ]
 }
 
-resource "aws_lb_target_group" "kaisen-eks-alb-tg" {
-  name                              = "Kaisen-EKS-ALB-TG"
+resource "aws_lb_target_group" "kdzdo-eks-alb-tg" {
+  name                              = "Kdzdo-EKS-ALB-TG"
   port                              = 30007
   protocol                          = "HTTP"
   vpc_id                            = module.aws_compute_base.vpc
@@ -32,29 +32,29 @@ resource "aws_lb_target_group" "kaisen-eks-alb-tg" {
     protocol = "HTTP"
   }
   depends_on = [
-    aws_eks_node_group.kaisen-eks-nodegroup
+    aws_eks_node_group.kdzdo-eks-nodegroup
   ]
 }
 
-resource "aws_lb_listener" "kaisen-eks-alb-listener" {
+resource "aws_lb_listener" "kdzdo-eks-alb-listener" {
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.kaisen-eks-alb-tg.arn
+    target_group_arn = aws_lb_target_group.kdzdo-eks-alb-tg.arn
   }
-  load_balancer_arn = aws_lb.kaisen-eks-alb.arn
+  load_balancer_arn = aws_lb.kdzdo-eks-alb.arn
   port              = "80"
   protocol          = "HTTP"
 
   depends_on = [
-    aws_eks_node_group.kaisen-eks-nodegroup
+    aws_eks_node_group.kdzdo-eks-nodegroup
   ]
 }
 
-resource "aws_autoscaling_attachment" "kaisen-eks-alb-attachment" {
-  autoscaling_group_name = aws_eks_node_group.kaisen-eks-nodegroup.resources.0.autoscaling_groups.0.name
-  lb_target_group_arn    = aws_lb_target_group.kaisen-eks-alb-tg.arn
+resource "aws_autoscaling_attachment" "kdzdo-eks-alb-attachment" {
+  autoscaling_group_name = aws_eks_node_group.kdzdo-eks-nodegroup.resources.0.autoscaling_groups.0.name
+  lb_target_group_arn    = aws_lb_target_group.kdzdo-eks-alb-tg.arn
 
   depends_on = [
-    aws_eks_node_group.kaisen-eks-nodegroup
+    aws_eks_node_group.kdzdo-eks-nodegroup
   ]
 }

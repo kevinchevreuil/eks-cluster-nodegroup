@@ -1,7 +1,7 @@
-resource "aws_eks_cluster" "kaisen-eks" {
-  name                      = "Kaisen-EKS"
+resource "aws_eks_cluster" "kdzdo-eks" {
+  name                      = "Kdzdo-EKS"
   enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-  role_arn                  = aws_iam_role.kaisen-eks-role.arn
+  role_arn                  = aws_iam_role.kdzdo-eks-role.arn
   version                   = var.k8s_version
 
   vpc_config {
@@ -13,6 +13,6 @@ resource "aws_eks_cluster" "kaisen-eks" {
   }
 
   depends_on = [
-    aws_iam_role_policy_attachment.kaisen-eks-role-attachment
+    aws_iam_role_policy_attachment.kdzdo-eks-role-attachment
   ]
 }
